@@ -47,7 +47,7 @@ public class UpdateAccessConfigSubCommandTest {
             "-t topicA=DENY;topicB=PUB|SUB",
             "-g groupA=DENY;groupB=SUB",
             "-m true"};
-        // Note: Posix parser is capable of handling values that contains '='.
+        // Note: Posix parser is capable of handling values that contains '='. 
         final CommandLine commandLine =
             ServerUtil.parseCmdLine("mqadmin " + cmd.commandName(), subargs,
                 cmd.buildCommandlineOptions(options), new PosixParser());
