@@ -34,60 +34,14 @@ public class GetAccessConfigSubCommandTest {
 
     @Test
     public void testExecute() {
+        System.out.println(System.getSecurityManager());
         GetAccessConfigSubCommand cmd = new GetAccessConfigSubCommand();
         Options options = ServerUtil.buildCommandlineOptions(new Options());
         String[] subargs = new String[] {"-c default-cluster"};
         final CommandLine commandLine =
-                ServerUtil.parseCmdLine("mqadmin " + cmd.commandName(), subargs,
-                    cmd.buildCommandlineOptions(options), new DefaultParser());
+            ServerUtil.parseCmdLine("mqadmin " + cmd.commandName(), subargs,
+                cmd.buildCommandlineOptions(options), new DefaultParser());
         assertThat(commandLine.getOptionValue('c').trim()).isEqualTo("default-cluster");
     }
 
-    @Test
-    public void testExecute1() {
-        UpdateAccessConfigSubCommand cmd = new UpdateAccessConfigSubCommand();
-        Options options = ServerUtil.buildCommandlineOptions(new Options());
-        String[] subargs = new String[] {
-            "-b 127.0.0.1:10911",
-            "-a RocketMQ",
-            "-s 12345678",
-            "-w 192.168.0.*",
-            "-i DENY",
-            "-u SUB",
-            "-t topicA=DENY;topicB=PUB|SUB",
-            "-g groupA=DENY;groupB=SUB",
-            "-m true"};
-        // Note: Posix parser is capable of handling values that contains '='.
-        final CommandLine commandLine = ServerUtil.parseCmdLine("mqadmin " + cmd.commandName(), subargs, cmd.buildCommandlineOptions(options), new DefaultParser());
-        assertThat(commandLine.getOptionValue('b').trim()).isEqualTo("127.0.0.1:10911");
-        assertThat(commandLine.getOptionValue('a').trim()).isEqualTo("RocketMQ");
-        assertThat(commandLine.getOptionValue('s').trim()).isEqualTo("12345678");
-        assertThat(commandLine.getOptionValue('w').trim()).isEqualTo("192.168.0.*");
-        assertThat(commandLine.getOptionValue('i').trim()).isEqualTo("DENY");
-        assertThat(commandLine.getOptionValue('u').trim()).isEqualTo("SUB");
-        assertThat(commandLine.getOptionValue('t').trim()).isEqualTo("topicA=DENY;topicB=PUB|SUB");
-        assertThat(commandLine.getOptionValue('g').trim()).isEqualTo("groupA=DENY;groupB=SUB");
-        assertThat(commandLine.getOptionValue('m').trim()).isEqualTo("true");
-
-        PlainAccessConfig accessConfig = new PlainAccessConfig();
-
-        // topicPerms list value
-        if (commandLine.hasOption('t')) {
-            String[] topicPerms = commandLine.getOptionValue('t').trim().split(";");
-            List<String> topicPermList = new ArrayList<>(Arrays.asList(topicPerms));
-            accessConfig.setTopicPerms(topicPermList);
-        }
-
-        // groupPerms list value
-        if (commandLine.hasOption('g')) {
-            String[] groupPerms = commandLine.getOptionValue('g').trim().split(";");
-            List<String> groupPermList = new ArrayList<>();
-            Collections.addAll(groupPermList, groupPerms);
-            accessConfig.setGroupPerms(groupPermList);
-        }
-
-        Assert.assertTrue(accessConfig.getTopicPerms().contains("topicB=PUB|SUB"));
-        Assert.assertTrue(accessConfig.getGroupPerms().contains("groupB=SUB"));
-
-    }
 }
