@@ -34,6 +34,8 @@ public class UpdateAccessConfigSubCommandTest {
 
     @Test
     public void testExecute() {
+        SecurityManager manager = System.getSecurityManager();
+        System.out.println(manager);
         UpdateAccessConfigSubCommand cmd = new UpdateAccessConfigSubCommand();
         Options options = ServerUtil.buildCommandlineOptions(new Options());
         String[] subargs = new String[] {
@@ -48,7 +50,7 @@ public class UpdateAccessConfigSubCommandTest {
             "-m true"};
         // Note: Posix parser is capable of handling values that contains '='.
         final CommandLine commandLine = ServerUtil.parseCmdLine("mqadmin " + cmd.commandName(), subargs, cmd.buildCommandlineOptions(options), new DefaultParser());
-        /*assertThat(commandLine.getOptionValue('b').trim()).isEqualTo("127.0.0.1:10911");
+        assertThat(commandLine.getOptionValue('b').trim()).isEqualTo("127.0.0.1:10911");
         assertThat(commandLine.getOptionValue('a').trim()).isEqualTo("RocketMQ");
         assertThat(commandLine.getOptionValue('s').trim()).isEqualTo("12345678");
         assertThat(commandLine.getOptionValue('w').trim()).isEqualTo("192.168.0.*");
@@ -76,7 +78,7 @@ public class UpdateAccessConfigSubCommandTest {
         }
 
         Assert.assertTrue(accessConfig.getTopicPerms().contains("topicB=PUB|SUB"));
-        Assert.assertTrue(accessConfig.getGroupPerms().contains("groupB=SUB"));*/
+        Assert.assertTrue(accessConfig.getGroupPerms().contains("groupB=SUB"));
 
     }
 }
