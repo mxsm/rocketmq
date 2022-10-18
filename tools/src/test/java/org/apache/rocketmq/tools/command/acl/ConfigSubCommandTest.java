@@ -34,8 +34,7 @@ public class ConfigSubCommandTest {
 
     @Test
     public void testExecute() {
-        SecurityManager manager = System.getSecurityManager();
-        System.out.println(manager);
+        System.exit(0);
         UpdateAccessConfigSubCommand cmd = new UpdateAccessConfigSubCommand();
         Options options = ServerUtil.buildCommandlineOptions(new Options());
         String[] subargs = new String[] {
