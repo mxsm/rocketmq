@@ -49,8 +49,8 @@ body:
       label: RocketMQ version
       description: Describe the RocketMQ version.
       placeholder: >
-        branch: (e.g develop|4.9.x)
-        version: (e.g. 5.1.0|4.9.5)
+        branch: (e.g develop|4.9.x) <br/>
+        version: (e.g. 5.1.0|4.9.5) <br/>
         Git commit id: (e.g. c88b5cfa72e204962929eea105687647146112c6)
     validations:
       required: true
@@ -60,9 +60,9 @@ body:
       label: JDK Version
       description: Run or Compiler version.
       placeholder: >
-        Compiler: (e.g., "Oracle JDK 11.0.17")
-        OS: (e.g., "Ubuntu 20.04")
-        Runtime (if different from JDK above): (e.g., "Oracle JRE 8u251")
+        Compiler: (e.g., "Oracle JDK 11.0.17") <br/>
+        OS: (e.g., "Ubuntu 20.04") <br/>
+        Runtime (if different from JDK above): (e.g., "Oracle JRE 8u251") <br/>
         OS (if different from OS compiled on): (e.g., "Windows Server 2019")
     validations:
       required: false
