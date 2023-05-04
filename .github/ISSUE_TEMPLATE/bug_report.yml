@@ -49,8 +49,8 @@ body:
       label: RocketMQ version
       description: Describe the RocketMQ version.
       placeholder: >
-        branch: (e.g develop|4.9.x) <br/>
-        version: (e.g. 5.1.0|4.9.5) <br/>
+        branch: (e.g develop|4.9.x) \n
+        version: (e.g. 5.1.0|4.9.5) \n
         Git commit id: (e.g. c88b5cfa72e204962929eea105687647146112c6)
     validations:
       required: true
